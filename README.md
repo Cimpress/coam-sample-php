@@ -8,6 +8,12 @@ or
 
 - Apache and PHP stack
 
+In addition to the aforementioned development dependencies, you will need the following:
+
+- Client ID / Secret
+- Client authorized to access api.cimpress.io
+- Permissions configured in IAM
+
 ## Getting Started
 
 Populate a `config.ini` file in the project's directory:
