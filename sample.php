@@ -6,10 +6,10 @@ $clientID = $ini_array['CLIENT_ID'];
 $clientSecret = $ini_array['CLIENT_SECRET'];
 
 if ($clientID == '' || $clientSecret == '') {
-  error_log("CLIENT_ID or CLIENT_SECRET missing\n", 0);
+  exit("CLIENT_ID or CLIENT_SECRET missing\n");
 }
 
-print "Retrieving IAM access token for client ID ".$clientID."\n";
+echo "Retrieving IAM access token for client ID $clientID".PHP_EOL;
 
 $postData = array(
     'client_id' => $clientID,
@@ -40,13 +40,13 @@ if($response === FALSE){
 $responseData = json_decode($response, TRUE);
 $authToken = $responseData['access_token'];
 
-print "Token: ".$authToken."\n\n";
+echo  "Token: $authToken.\n\n";
 
 $sub = 'adfs|cbaldauf@cimpress.com';
 $resourceType = 'merchants';
 $resourceIdentifier = 'vistaprint';
 
-print "Retrieving IAM permissions for ".$sub." on ".$resourceType." ".$resourceIdentifier."\n";
+echo "Retrieving IAM permissions for $sub on $resourceType $resourceIdentifier".PHP_EOL;
 
 $ch = curl_init('https://api.cimpress.io/auth/iam/v0/user-permissions/'.$sub.'/'.$resourceType.'/'.$resourceIdentifier);
 curl_setopt_array($ch, array(
@@ -65,6 +65,6 @@ if($response === FALSE){
     die(curl_error($ch));
 }
 
-print "===== RESPONSE =====\n";
+echo "===== RESPONSE =====".PHP_EOL;
 print($response);
 ?>
