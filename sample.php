@@ -40,7 +40,7 @@ if($response === FALSE){
 $responseData = json_decode($response, TRUE);
 $authToken = $responseData['access_token'];
 
-echo  "Token: $authToken.\n\n";
+echo  "Token: $authToken\n\n";
 
 $sub = 'adfs|cbaldauf@cimpress.com';
 $resourceType = 'merchants';
