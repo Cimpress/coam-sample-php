@@ -9,7 +9,7 @@ if ($clientID == '' || $clientSecret == '') {
   exit("CLIENT_ID or CLIENT_SECRET missing\n");
 }
 
-echo "Retrieving IAM access token for client ID $clientID".PHP_EOL;
+echo "Retrieving access token for client ID $clientID".PHP_EOL;
 
 $postData = array(
     'client_id' => $clientID,
@@ -42,13 +42,13 @@ $authToken = $responseData['access_token'];
 
 echo  "Token: $authToken\n\n";
 
-$sub = 'adfs|cbaldauf@cimpress.com';
+$principal = 'adfs|jdaviscooke@cimpress.com';
 $resourceType = 'merchants';
 $resourceIdentifier = 'vistaprint';
 
-echo "Retrieving IAM permissions for $sub on $resourceType $resourceIdentifier".PHP_EOL;
+echo "Retrieving COAM permissions for $principal on $resourceType $resourceIdentifier".PHP_EOL;
 
-$ch = curl_init('https://api.cimpress.io/auth/iam/v0/user-permissions/'.$sub.'/'.$resourceType.'/'.$resourceIdentifier);
+$ch = curl_init('https://api.cimpress.io/auth/access-management/v1/principals/'.$principal.'\/permissions\/'.$resourceType.'/'.$resourceIdentifier);
 curl_setopt_array($ch, array(
     CURLOPT_RETURNTRANSFER => TRUE,
     CURLOPT_HTTPHEADER => array(
